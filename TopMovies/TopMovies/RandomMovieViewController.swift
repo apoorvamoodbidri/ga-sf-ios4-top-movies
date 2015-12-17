@@ -27,11 +27,20 @@ import UIKit
 
 class RandomMovieViewController: UIViewController {
     
+    
     //
     // Put IBOutlets Below This Line
     //
     
     @IBOutlet weak var titleLabel: UILabel?
+    
+    @IBOutlet weak var directorLabel: UILabel?
+    
+    @IBOutlet weak var summaryLabel: UILabel?
+    
+    @IBOutlet weak var posterImageView: UIImageView!
+    
+    
     
     
     //
@@ -61,6 +70,28 @@ class RandomMovieViewController: UIViewController {
     //
     
     
+    @IBAction func didTapChangeMovieButton(sender: AnyObject) {
+        let max = self.movies!.count - 1
+        let randomNumber = self.randomIntegerWithMinimum(0, andMaximum: max)
+        let title = self.titleStringForMovieAtIndex(randomNumber)
+        let director = self.directorStringForMovieAtIndex(randomNumber)
+        let summary = self.summaryStringForMovieAtIndex(randomNumber)
+        
+        
+        self.titleLabel?.text = title
+        self.directorLabel?.text = director
+        self.summaryLabel?.text = summary
+        
+        let posterImageURL = self.posterImageURLForMovieAtIndex(randomNumber)
+        self.posterImageView?.image = nil
+        self.posterImageView?.setImageWithURL(posterImageURL)
+        
+        
+        print("title = \(title)")
+        
+        
+        
+    }
     
     //
     // Put IBAction Above This Line
